@@ -1,16 +1,24 @@
 # SQL-Performance-Tuning-for-Realtime-Systems
 
-This query retrieves the index name and definition for the index 'idx_pcq_subroute_status_cuedate' 
-on the 'parking_customer_queue' table. This can be useful for verifying the index structure and 
-ensuring it is correctly defined for performance tuning purposes.
+This SQL query is used to retrieve the name and definition of a specific index on a given table in a PostgreSQL database. It is useful for verifying if the index is correctly defined to support query performance tuning.
 ```sql
 SELECT 
     indexname, 
     indexdef 
 FROM pg_indexes 
-WHERE tablename = 'parking_customer_queue' 
-  AND indexname = 'idx_pcq_subroute_status_cuedate';
+WHERE tablename = '<your_table_name>' 
+  AND indexname = '<your_index_name>';
 ```
+
+🔍 Usage Tips:
+
+- Replace <your_table_name> with the name of the table you want to inspect.
+- Replace <your_index_name> with the name of the index you are checking.
+- Useful to check if the index:
+    - Is a covering index (includes columns needed by queries)
+    - Is a partial index (applies to a subset of data)
+    - Uses functional expressions (e.g., indexing on LOWER(column))
+    - Matches query WHERE clauses for effective index usage
 
 ---
 
